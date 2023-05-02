@@ -3,7 +3,7 @@ const winston =require("winston")
 const {router}=require("./routes/user")
 require("dotenv").config();
 const {connection}=require("./config/db")
-const {iprouter}=require("./routes/ip")
+// const {iprouter}=require("./routes/ip")
 
 const app=express();
 app.use(express.json());
@@ -13,15 +13,9 @@ app.get("/", async(req,res)=>{
 })
 
 app.use("/user",router)
-app.use("/api/",iprouter)
+// app.use("/api/",iprouter)
 
-const db=connection;
-db.on('error',(error)=>{
-    winston.error(`mongodb connected error : ${error.message}`)
-});
-db.once('open',()=>{
-    winston.info("connected to data base")
-})
+
 
 
 app.listen(process.env.port||4500, async()=>{
